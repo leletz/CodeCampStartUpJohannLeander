@@ -11,27 +11,24 @@ class IdeasController < ApplicationController
         @idea = Idea.new(idea_params)
 
         if @idea.save
-            flash.notice = "Das hat geklappt!"
+            flash.notice = "Idea created!"
             redirect_to ideas_path
         else
-            flash.alert = "FEHLER!!!"
+            flash.alert = "Something went wrong."
             render :new
         end
     end
 
     def update
         @idea = Idea.find(params[:id])
-    end
 
-    def idea_params
-        params.require(:idea).permit(
-            :title,
-            :discription,
-            :target,
-            :market,
-            :help,
-            :keywords
-        )
+        if @idea.update(idea_params)
+            flash.notice = "Idea updated!"
+            redirect_to ideas_path
+        else
+            flash.alert = "Something went wrong."
+            render :edit
+        end
     end
 
     def show
@@ -46,12 +43,25 @@ class IdeasController < ApplicationController
         @idea = Idea.find(params[:id])
 
         if @idea.destroy
-            flash.notice = "Idee gelöscht!"
+            flash.notice = "Idea deleted!"
             redirect_to ideas_path
         else
             flash.alert = "Cound not delete Idea"
             redirect_to ideas_path
         end
     end
+
+    private
+
+        def idea_params
+            params.require(:idea).permit(
+                :title,
+                :discription,
+                :target,
+                :market,
+                :help,
+                :keyword
+            )
+        end
 
 end

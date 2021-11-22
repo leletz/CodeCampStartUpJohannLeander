@@ -1,12 +1,22 @@
-<h1>Start Up Liste</h1>
-<ul>
-    <% @ideas.each do |idea| %>
-        <li>
-            <h3>
-            <%= link_to idea.title, idea_path(idea)%>
-            <%= link_to 'Idee editieren', edit_idea_path(idea), data: {confirm: 'Du darfst die Idee nur bearbeiten, wenn du sie auch erstellt hast. Hast du die Idee erstellt?'} %>
-            <%= link_to 'Idee löschen', idea_path(idea), method: 'DELETE', data: {confirm: 'Möchtest du die Idee wirklich löschen? Dafür musst du sie auch erstellt haben'} %>
-            </h3>
-        </li>
-    <% end %>
-</ul>
+<div class="container">
+    <h1 class="mb-2">List of StartUp ideas</h1>
+    <ul style="list-style-type:none">
+        <% @ideas.order(created_at: :desc).each do |idea| %>
+            <li>
+                <h3>
+                    <%= link_to idea.title, idea_path(idea)%>
+                </h3>
+            </li>
+            <li>
+                <%= idea.discription.truncate(50) %>
+            </li>
+            <li>
+                <i>#<%= idea.keyword %></i>
+            </li>
+            <li class="mb-5">
+                <%= link_to 'Edit idea', edit_idea_path(idea), data: {confirm: 'You are only allowed to edit ideas you have created. Have you created this idea?'} %>
+                <%= link_to 'Delete idea', idea_path(idea), method: 'DELETE', data: {confirm: 'Do you really want to delete this idea? Only delete ideas you have created yourself.'} %>
+            </li>
+        <% end %>
+    </ul>
+</div> 

@@ -6,7 +6,7 @@ class CommentsController< ApplicationController
             flash.notice = "Comment saved"
             redirect_to idea_path(@idea)
         else
-            flash.alert = "Fehlgeschlagen"
+            flash.alert = "Something went wrong"
             redirect_to idea_path(@idea)
         end
     end
