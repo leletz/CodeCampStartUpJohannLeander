@@ -1,0 +1,31 @@
+<%= form_for @idea do |f| %>
+    <div class="container">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="container">
+      <%= f.label :discription %>
+      <%= f.text_area :discription %>
+    </div>
+    <div>
+    <%= f.label :target %>
+    <%= f.text_field :target %>
+  </div>
+    <div class="container">
+      <%= f.label :keyword %>
+      <%= f.text_field :keyword %>
+    </div>
+    <div class="container">
+    <%= f.label :market%>
+    <%= f.radio_button :market, 'B2B', :checked => true %> B2B
+    <%= f.radio_button :market, 'B2C'%> B2C
+  </div>
+
+    <div>
+    <%= f.label :help%>
+    <%= f.text_field :help %>
+  </div>
+    <div>
+      <%= f.submit %>
+    </div>
+  <% end %>

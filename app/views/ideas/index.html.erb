@@ -1,0 +1,12 @@
+<h1>Start Up Liste</h1>
+<ul>
+    <% @ideas.each do |idea| %>
+        <li>
+            <h3>
+            <%= link_to idea.title, idea_path(idea)%>
+            <%= link_to 'Idee editieren', edit_idea_path(idea), data: {confirm: 'Du darfst die Idee nur bearbeiten, wenn du sie auch erstellt hast. Hast du die Idee erstellt?'} %>
+            <%= link_to 'Idee löschen', idea_path(idea), method: 'DELETE', data: {confirm: 'Möchtest du die Idee wirklich löschen? Dafür musst du sie auch erstellt haben'} %>
+            </h3>
+        </li>
+    <% end %>
+</ul>

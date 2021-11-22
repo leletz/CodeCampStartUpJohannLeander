@@ -1,0 +1,62 @@
+<h2><%= @idea.title %></h2>
+<p><%= @idea.discription %></p>
+<p><%= @idea.target %></p>
+<p><%= @idea.help %></p>
+<p><%= @idea.market %></p>
+<p><%= @idea.keyword %></p>
+
+<ol>
+  <% @idea.comments.order(created_at: :desc).each do |comment| %>
+    <li>
+      <p>
+        <%= comment.text %>
+      </p>
+      <p>
+        <%= link_to comment.name, "mailto:#{comment.email}" %>
+        <%= comment.reference %>
+      </p>
+    </li>
+  <% end %>
+</ol>
+
+<div>
+<%= form_for [@idea, Comment.new] do |f| %>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="form-floating mb-3">
+        <%= f.label :text %>
+          <%= f.text_field :text, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-floating mb-3">
+        <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating mb-3">
+        <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="col">
+      <div class="form-floating mb-3">
+      <%= f.label :Reference %>
+        <%= f.text_field :reference, class: 'form-control' %>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-floating mb-3">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
